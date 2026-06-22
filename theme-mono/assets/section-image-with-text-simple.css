@@ -1,0 +1,308 @@
+/* ============================================
+   Image with Text (Simple) — Broken Grid Style
+   - Image clips diagonally and bleeds into content
+   - Decorative offset shadow behind image
+   - Heading underline expands on section hover
+   - CTA: sliding fill from left + arrow shift
+   - Vertical accent line in content
+   ============================================ */
+
+.image-with-text-simple {
+  padding: 8rem 1.5rem;
+  overflow: hidden;
+}
+
+/* --- Layout --- */
+
+.image-with-text-simple__container {
+  display: flex;
+  align-items: stretch;
+  max-width: 120rem;
+  margin: 0 auto;
+  position: relative;
+}
+
+.image-with-text-simple__container--right {
+  flex-direction: row-reverse;
+}
+
+/* --- Image side --- */
+
+.image-with-text-simple__image {
+  flex: 0 0 50%;
+  position: relative;
+  /* bleeds into content area */
+  margin-right: -3rem;
+  z-index: 1;
+  min-height: 48rem;
+  transform: perspective(900px) rotateY(4deg) rotateX(1deg);
+  transform-origin: left center;
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.image-with-text-simple__container--right .image-with-text-simple__image {
+  margin-right: 0;
+  margin-left: -3rem;
+  transform: perspective(900px) rotateY(-4deg) rotateX(1deg);
+  transform-origin: right center;
+}
+
+.image-with-text-simple__image:hover {
+  transform: perspective(900px) rotateY(-2deg) rotateX(-0.5deg);
+}
+
+.image-with-text-simple__container--right .image-with-text-simple__image:hover {
+  transform: perspective(900px) rotateY(2deg) rotateX(-0.5deg);
+}
+
+.image-with-text-simple__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* diagonal cut on the right edge */
+  clip-path: polygon(0 0, 100% 0, 88% 100%, 0 100%);
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    clip-path 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.image-with-text-simple__container--right .image-with-text-simple__image img {
+  clip-path: polygon(12% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.image-with-text-simple__image:hover img {
+  transform: scale(1.04);
+  clip-path: polygon(0 0, 100% 0, 92% 100%, 0 100%);
+}
+
+.image-with-text-simple__container--right .image-with-text-simple__image:hover img {
+  clip-path: polygon(8% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+/* --- Content side --- */
+
+.image-with-text-simple__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5rem 5rem 5rem 8rem;
+  position: relative;
+  background: rgb(var(--color-background));
+  z-index: 2;
+}
+
+.image-with-text-simple__container--right .image-with-text-simple__content {
+  padding: 5rem 8rem 5rem 5rem;
+}
+
+/* Vertical accent line */
+.image-with-text-simple__content::before {
+  content: '';
+  position: absolute;
+  left: 4.5rem;
+  top: 20%;
+  height: 60%;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(var(--color-foreground), 0.18) 25%,
+    rgba(var(--color-foreground), 0.18) 75%,
+    transparent
+  );
+  transition: height 0.5s ease, top 0.5s ease;
+}
+
+.image-with-text-simple__container--right .image-with-text-simple__content::before {
+  left: auto;
+  right: 4.5rem;
+}
+
+.image-with-text-simple:hover .image-with-text-simple__content::before {
+  top: 10%;
+  height: 80%;
+}
+
+/* --- Heading --- */
+
+.image-with-text-simple__heading {
+  font-size: clamp(2.2rem, 3.5vw, 3.8rem);
+  line-height: 1.1;
+  margin: 0 0 1.6rem;
+  position: relative;
+  display: inline-block;
+}
+
+/* Expanding underline */
+.image-with-text-simple__heading::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 0;
+  height: 3px;
+  width: 2.4rem;
+  background: currentColor;
+  transition: width 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.image-with-text-simple:hover .image-with-text-simple__heading::after {
+  width: 100%;
+}
+
+/* --- Text --- */
+
+.image-with-text-simple__text {
+  font-size: 1.6rem;
+  line-height: 1.75;
+  opacity: 0.75;
+  margin: 0 0 3rem;
+  max-width: 42ch;
+}
+
+/* --- CTA Link — sliding fill + arrow --- */
+
+.image-with-text-simple__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  align-self: flex-start;
+  padding: 1.2rem 2.8rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: rgb(var(--color-foreground));
+  border: 1.5px solid currentColor;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.4s ease;
+}
+
+/* sliding fill from left */
+.image-with-text-simple__link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgb(var(--color-foreground));
+  transform: translateX(-101%);
+  transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+  z-index: 0;
+}
+
+.image-with-text-simple__link:hover::before {
+  transform: translateX(0);
+}
+
+.image-with-text-simple__link:hover {
+  color: rgb(var(--color-background));
+}
+
+/* arrow icon after text */
+.image-with-text-simple__link::after {
+  content: '\2192'; /* → */
+  position: relative;
+  z-index: 1;
+  margin-left: 0.8rem;
+  transition: transform 0.35s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.image-with-text-simple__link:hover::after {
+  transform: translateX(0.5rem);
+}
+
+/* keep link text above the fill */
+.image-with-text-simple__link > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* This targets the text node - set z-index via isolation on parent already handled by overflow:hidden */
+
+/* ============================================
+   Mobile
+   ============================================ */
+
+@media screen and (max-width: 749px) {
+  .image-with-text-simple {
+    padding: 4rem 1.5rem;
+  }
+
+  .image-with-text-simple__container,
+  .image-with-text-simple__container--right {
+    flex-direction: column;
+  }
+
+  .image-with-text-simple__image {
+    flex: none;
+    margin-right: 0;
+    margin-left: 0;
+    min-height: 28rem;
+    /* reset tilt on mobile */
+    transform: none;
+  }
+
+  .image-with-text-simple__container--right .image-with-text-simple__image {
+    transform: none;
+  }
+
+  .image-with-text-simple__image:hover,
+  .image-with-text-simple__container--right .image-with-text-simple__image:hover {
+    transform: none;
+  }
+
+  .image-with-text-simple__image img {
+    /* horizontal cut at bottom for mobile */
+    clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%);
+  }
+
+  .image-with-text-simple__image:hover img {
+    clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%);
+  }
+
+  .image-with-text-simple__content,
+  .image-with-text-simple__container--right .image-with-text-simple__content {
+    padding: 4rem 2rem 3rem 2rem;
+  }
+
+  /* horizontal accent line on mobile instead of vertical */
+  .image-with-text-simple__content::before,
+  .image-with-text-simple__container--right .image-with-text-simple__content::before {
+    left: 2rem;
+    right: auto;
+    top: 0;
+    height: 2px;
+    width: 40%;
+    background: linear-gradient(
+      to right,
+      rgba(var(--color-foreground), 0.18),
+      transparent
+    );
+  }
+
+  .image-with-text-simple:hover .image-with-text-simple__content::before {
+    top: 0;
+    height: 2px;
+    width: 70%;
+  }
+
+  .image-with-text-simple__text {
+    max-width: 100%;
+  }
+}
+
+/* ============================================
+   Reduced motion
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .image-with-text-simple__image,
+  .image-with-text-simple__image img,
+  .image-with-text-simple__link::before,
+  .image-with-text-simple__link::after,
+  .image-with-text-simple__heading::after,
+  .image-with-text-simple__content::before {
+    transition: none;
+  }
+}

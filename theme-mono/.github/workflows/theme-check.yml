@@ -1,0 +1,38 @@
+name: Shopify Theme Check
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'sections/**'
+      - 'snippets/**'
+      - 'layout/**'
+      - 'templates/**'
+      - 'locales/**'
+      - 'config/**'
+      - 'assets/**'
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  theme-check:
+    name: Run Shopify Theme Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Shopify CLI
+        run: npm install -g @shopify/cli @shopify/theme
+
+      - name: Run theme check
+        run: shopify theme check --fail-level error
+
+      - name: Check for console.log statements
+        run: |
+          if grep -r "console\.log" assets/ --include="*.js" --exclude="*.min.js"; then
+            echo "⚠️  console.log found in assets. Remove before production."
+            exit 1
+          fi

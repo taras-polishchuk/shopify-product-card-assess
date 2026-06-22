@@ -1,0 +1,88 @@
+<style>
+  #shopify-section-{{ section.id }} > .announcement-bar-simple {
+    background-color: {{ section.settings.background_color }};
+    text-align: center;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #shopify-section-{{ section.id }} > .announcement-bar-simple a {
+    color: {{ section.settings.text_color }};
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  #shopify-section-{{ section.id }} > .announcement-bar-simple a:hover {
+    text-shadow: 0 0 5px {{ section.settings.text_color }};
+  }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .hide-on-mobile {
+      display: none;
+    }
+  }
+</style>
+
+{% if section.settings.enable_announcement %}
+  <div class="announcement-bar-simple {% unless section.settings.show_on_mobile %}hide-on-mobile{% endunless %}">
+    <a
+      href="{{ section.settings.link_url }}"
+    >
+      <span>{{ section.settings.announcement_text }}</span>
+    </a>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Announcement Bar Simple",
+  "tag": "section",
+  "limit": 1,
+  "enabled_on": { "groups": ["header"] },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_announcement",
+      "label": "Enable Announcement Bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "announcement_text",
+      "label": "Announcement Text",
+      "default": "Free shipping on orders over $50!"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL",
+      "default": "/collections/all"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_mobile",
+      "label": "Show on Mobile",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement Bar Simple",
+      "category": "Announcement"
+    }
+  ]
+}
+{% endschema %}

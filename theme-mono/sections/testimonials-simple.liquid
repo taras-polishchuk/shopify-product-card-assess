@@ -1,0 +1,108 @@
+{% comment %}
+  Testimonials Simple Section
+{% endcomment %}
+{{ 'section-testimonials-simple.css' | asset_url | stylesheet_tag }}
+
+<div
+  class="testimonials-simple__wrapper"
+  style="padding-top: {{ section.settings.paddign_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="testimonials-simple__header">
+    <h2 class="testimonials-simple__title">{{ section.settings.section_title }}</h2>
+  </div>
+  <div class="testimonials-simple__content">
+    {% for block in section.blocks %}
+      <div class="testimonial">
+        <div class="testimonial__stars">
+          {% for i in (1..block.settings.stars) %}
+            <span class="testimonial__star" style="color: {{ section.settings.section_star_color }};">★</span>
+          {% endfor %}
+        </div>
+        <p class="testimonial__quote">"{{ block.settings.quote }}"</p>
+        <p class="testimonial__author">- {{ block.settings.author }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Testimonials Simple",
+  "tag": "section",
+  "class": "testimonials-simple",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Testimonials"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "What Our Customers Say"
+    },
+    {
+      "type": "range",
+      "id": "paddign_top",
+      "label": "Section Padding Top",
+      "default": 60,
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Section Padding Bottom",
+      "default": 60,
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "section_star_color",
+      "label": "Section Star Color",
+      "default": "#000000"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "limit": 50,
+      "settings": [
+        {
+          "type": "text",
+          "id": "quote",
+          "label": "Quote",
+          "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit auctor duis, sed efficitur ipsum."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author",
+          "default": "John Doe"
+        },
+        {
+          "type": "range",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "id": "stars",
+          "label": "Stars",
+          "default": 5
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials Simple",
+      "category": "Testimonials"
+    }
+  ]
+}
+{% endschema %}

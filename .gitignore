@@ -1,0 +1,25 @@
+# OS noise
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Shopify local config (theme passwords etc)
+.shopify/config.yml
+.shopify-cli/
+
+# Node
+node_modules/
+npm-debug.log
+
+# Build outputs
+dist/
+build/
+.cache/
+
+# Logs
+*.log

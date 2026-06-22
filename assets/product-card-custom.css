@@ -1,0 +1,424 @@
+/* =========================================================================
+   Product Card (FE Technical Assessment)
+   Tokens extracted from Figma frame 1:38 (D/Product Tile, 315 x 452).
+   ========================================================================= */
+
+/* ---- Tokens ----------------------------------------------------------- */
+:root {
+  /* Spacing & sizing tokens (Figma frame 1:38 — D/Product Tile) */
+  --pcc-card-radius: 10px;
+  --pcc-badge-radius: 999px;
+  --pcc-card-stroke: #E8E8E8;
+  --pcc-card-bg: #FFFFFF;
+
+  /* Color tokens */
+  --pcc-text-primary: #111111;
+  --pcc-text-secondary: #0A4874;
+  --pcc-price-sale: #FF0000;
+  --pcc-swatch-fill: #CCCCCC;
+  --pcc-swatch-ring: #0A4874;
+
+  /* Swatch sizing — matches Figma: 20×20 dots, selected 24×24 ring (24-20=4, 2px each side) */
+  --pcc-swatch-size: 20px;
+  --pcc-swatch-ring-size: 24px;
+  --pcc-swatch-gap: 8px;
+  --pcc-swatch-ring-stroke: 1px;
+
+  /* Layout gaps (Figma: card gap 15, info gap 15, price gap 8) */
+  --pcc-card-gap: 15px;
+  --pcc-info-gap: 15px;
+  --pcc-heading-gap: 6px;
+  --pcc-price-gap: 8px;
+
+  /* Type tokens — match Figma per node */
+  --pcc-font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
+  --pcc-font-family-color-count: "Avenir Next", "Avenir", "Helvetica Neue", Arial, sans-serif;
+  --pcc-font-family-badge: "Franklin Gothic ATF", "Franklin Gothic Medium", "Franklin Gothic", "Roboto", Arial, sans-serif;
+
+  /* Vendor: Roboto Regular 14/16 → 1.143 */
+  --pcc-vendor-size: 14px;
+  --pcc-vendor-line: 16px;
+  --pcc-vendor-weight: 400;
+
+  /* Title: Roboto Medium 16/18 → 1.125 */
+  --pcc-title-size: 16px;
+  --pcc-title-line: 18px;
+  --pcc-title-weight: 500;
+
+  /* Price: Roboto Regular 14/16 → 1.143 */
+  --pcc-price-size: 14px;
+  --pcc-price-line: 16px;
+  --pcc-price-weight: 400;
+
+  /* Color count: Avenir Next Medium 14/16.8 → 1.2 */
+  --pcc-count-size: 14px;
+  --pcc-count-line: 16.8px;
+  --pcc-count-weight: 500;
+
+  /* Badge: Franklin Gothic ATF Medium 15/17.93 → 1.17 */
+  --pcc-badge-size: 15px;
+  --pcc-badge-line: 17.93px;
+  --pcc-badge-weight: 500;
+  --pcc-badge-pad-x: 12.8px;
+  --pcc-badge-pad-y: 6.4px;
+  --pcc-badge-gap: 12.8px;
+  --pcc-badge-radius-token: 25.6px;
+
+  --pcc-transition: 250ms ease;
+  --pcc-focus-ring: 2px solid var(--pcc-swatch-ring);
+  --pcc-focus-ring-offset: 2px;
+}
+
+/* ---- Card container --------------------------------------------------- */
+.pcc {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pcc-card-gap);
+  width: 100%;
+  max-width: 315px;
+  margin: 0 auto;
+  font-family: var(--pcc-font-family);
+  color: var(--pcc-text-primary);
+  position: relative;
+}
+
+/* ---- Media block ------------------------------------------------------ */
+.pcc__media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 315 / 340;
+  background: var(--pcc-card-bg);
+  border: 1px solid var(--pcc-card-stroke);
+  border-radius: var(--pcc-card-radius);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.pcc__media-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+  outline: none;
+}
+
+.pcc__media-link:focus-visible {
+  box-shadow: var(--pcc-focus-ring) inset;
+}
+
+.pcc__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity var(--pcc-transition);
+}
+
+.pcc__img--secondary {
+  opacity: 0;
+  z-index: 1;
+}
+
+.pcc__media-link:hover .pcc__img--primary,
+.pcc__media-link:focus-visible .pcc__img--primary,
+.pcc__media:hover .pcc__img--primary,
+.pcc__media:focus-within .pcc__img--primary {
+  opacity: 0;
+}
+
+.pcc__media-link:hover .pcc__img--secondary,
+.pcc__media-link:focus-visible .pcc__img--secondary,
+.pcc__media:hover .pcc__img--secondary,
+.pcc__media:focus-within .pcc__img--secondary {
+  opacity: 1;
+}
+
+/* ---- Badge ------------------------------------------------------------ */
+.pcc__badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--pcc-badge-gap);
+  padding: var(--pcc-badge-pad-y) var(--pcc-badge-pad-x);
+  background: var(--pcc-card-bg);
+  border: 1px solid var(--pcc-price-sale);
+  border-radius: var(--pcc-badge-radius);
+  color: var(--pcc-price-sale);
+  font-family: var(--pcc-font-family-badge);
+  font-weight: var(--pcc-badge-weight);
+  font-size: var(--pcc-badge-size);
+  line-height: var(--pcc-badge-line);
+  letter-spacing: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  transition: opacity var(--pcc-transition);
+}
+
+.pcc__badge--sale { color: var(--pcc-price-sale); border-color: var(--pcc-price-sale); }
+.pcc__badge--soldout {
+  color: var(--pcc-text-primary);
+  border-color: var(--pcc-text-primary);
+}
+.pcc__badge--hidden { opacity: 0; visibility: hidden; }
+
+/* ---- Info block ------------------------------------------------------- */
+.pcc__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pcc-info-gap);
+}
+
+/* ---- Swatches --------------------------------------------------------- */
+.pcc__swatches {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+
+.pcc__swatch-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pcc-swatch-gap);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pcc__swatch-item {
+  margin: 0;
+  padding: 0;
+}
+
+.pcc__swatch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--pcc-swatch-size);
+  height: var(--pcc-swatch-size);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 50%;
+  outline: none;
+  transition: transform var(--pcc-transition);
+}
+
+.pcc__swatch::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  transition: border-color var(--pcc-transition);
+  pointer-events: none;
+}
+
+.pcc__swatch--selected::before {
+  border-color: var(--pcc-swatch-ring);
+}
+
+.pcc__swatch:focus-visible {
+  outline: var(--pcc-focus-ring);
+  outline-offset: var(--pcc-focus-ring-offset);
+}
+
+.pcc__swatch--unavailable {
+  cursor: not-allowed;
+}
+
+.pcc__swatch--unavailable .pcc__swatch-fill {
+  opacity: 0.4;
+  position: relative;
+}
+
+.pcc__swatch--unavailable .pcc__swatch-fill::after {
+  content: '';
+  position: absolute;
+  inset: 50% 0 50% 0;
+  height: 1px;
+  background: currentColor;
+  background: var(--pcc-text-primary);
+  transform: rotate(-45deg);
+}
+
+.pcc__swatch-fill {
+  display: block;
+  width: var(--pcc-swatch-size);
+  height: var(--pcc-swatch-size);
+  border-radius: 50%;
+  background-color: var(--pcc-swatch-fill);
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+.pcc__color-count {
+  margin: 0;
+  font-family: var(--pcc-font-family-color-count);
+  font-weight: var(--pcc-count-weight);
+  font-size: var(--pcc-count-size);
+  line-height: var(--pcc-count-line);
+  letter-spacing: 0;
+  color: var(--pcc-text-primary);
+}
+
+/* ---- Heading group ---------------------------------------------------- */
+.pcc__heading-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--pcc-heading-gap);
+}
+
+.pcc__vendor {
+  margin: 0;
+  font-family: var(--pcc-font-family);
+  font-weight: var(--pcc-vendor-weight);
+  font-size: var(--pcc-vendor-size);
+  line-height: var(--pcc-vendor-line);
+  letter-spacing: 0;
+  color: var(--pcc-text-primary);
+}
+
+.pcc__title {
+  margin: 0;
+  font-family: var(--pcc-font-family);
+  font-weight: var(--pcc-title-weight);
+  font-size: var(--pcc-title-size);
+  line-height: var(--pcc-title-line);
+  letter-spacing: 0;
+  color: var(--pcc-text-secondary);
+}
+
+.pcc__title-link {
+  color: inherit;
+  text-decoration: none;
+  outline: none;
+}
+
+.pcc__title-link:hover { text-decoration: underline; }
+.pcc__title-link:focus-visible {
+  outline: var(--pcc-focus-ring);
+  outline-offset: var(--pcc-focus-ring-offset);
+  border-radius: 2px;
+}
+
+/* ---- Price ------------------------------------------------------------ */
+.pcc__price {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--pcc-price-gap);
+}
+
+.pcc__price-current {
+  font-family: var(--pcc-font-family);
+  font-weight: var(--pcc-price-weight);
+  font-size: var(--pcc-price-size);
+  line-height: var(--pcc-price-line);
+  color: var(--pcc-text-primary);
+}
+
+.pcc__price-current--sale {
+  color: var(--pcc-price-sale);
+}
+
+.pcc__price-compare s {
+  font-family: var(--pcc-font-family);
+  font-weight: var(--pcc-price-weight);
+  font-size: var(--pcc-price-size);
+  line-height: var(--pcc-price-line);
+  color: var(--pcc-text-primary);
+  text-decoration: line-through;
+}
+
+/* ---- Live region (visually hidden) ----------------------------------- */
+.pcc__sr-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  white-space: nowrap;
+}
+
+/* ---- Grid ------------------------------------------------------------- */
+.pcc-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.pcc-grid--1-mob { grid-template-columns: 1fr; }
+.pcc-grid--2-mob { grid-template-columns: repeat(2, 1fr); }
+.pcc-grid--2-col { grid-template-columns: repeat(2, 1fr); }
+.pcc-grid--3-col { grid-template-columns: repeat(3, 1fr); }
+.pcc-grid--4-col { grid-template-columns: repeat(4, 1fr); }
+
+@media (min-width: 750px) {
+  .pcc-grid--2-mob { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 990px) {
+  .pcc-grid--3-col { grid-template-columns: repeat(3, 1fr); }
+  .pcc-grid--4-col { grid-template-columns: repeat(4, 1fr); }
+}
+
+.pcc-grid__item { min-width: 0; }
+
+/* ---- Section header --------------------------------------------------- */
+.pcc-grid-section__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 16px;
+}
+
+.pcc-grid-section__heading { margin: 0; }
+
+/* ---- Accessibility helpers ------------------------------------------- */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---- Reduced motion --------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .pcc__img,
+  .pcc__swatch,
+  .pcc__swatch::before,
+  .pcc__badge {
+    transition: none;
+  }
+}
+
+/* ---- Touch / no-hover fallback --------------------------------------- */
+@media (hover: none) {
+  .pcc__media-link:hover .pcc__img--primary,
+  .pcc__media:hover .pcc__img--primary {
+    opacity: 1;
+  }
+  .pcc__media-link:hover .pcc__img--secondary,
+  .pcc__media:hover .pcc__img--secondary {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,273 @@
+{
+  "sections": {
+    "hero_banner_hPqUyR": {
+      "type": "hero-banner",
+      "name": "Hero Banner",
+      "settings": {
+        "banner_image": "shopify://shop_images/theme_cover_image.jpg",
+        "banner_heading": "Welcome to Our Line",
+        "banner_heading_color": "#ffffff",
+        "banner_subheading": "Discover our latest products and offers",
+        "banner_subheading_color": "#ffffff",
+        "banner_link": "shopify://pages/contact",
+        "primary_button_color": "#ffffff"
+      }
+    },
+    "image_banner": {
+      "type": "image-banner",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Browse our latest products",
+            "heading_size": "h0"
+          }
+        },
+        "button": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Shop all",
+            "button_link_1": "shopify://collections/all",
+            "button_style_secondary_1": true,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "button"
+      ],
+      "disabled": true,
+      "settings": {
+        "image": "shopify://shop_images/theme_cover_image.jpg",
+        "image_overlay_opacity": 40,
+        "image_height": "large",
+        "image_behavior": "none",
+        "desktop_content_position": "bottom-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": false,
+        "color_scheme": "scheme-3",
+        "stack_images_on_mobile": false,
+        "mobile_content_alignment": "center",
+        "show_text_below": false
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "collection": "all",
+        "products_to_show": 8,
+        "title": "Featured products",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "scheme-1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 44,
+        "padding_bottom": 36
+      }
+    },
+    "featured_collection_simple_RqgAMT": {
+      "type": "featured-collection-simple",
+      "name": "Featured Collection Simple",
+      "settings": {
+        "collection": "automated-collection",
+        "section_title": "Featured Collection",
+        "products_to_show": 8,
+        "products_per_row": 3,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "image_with_text_section_simple_ymDcap": {
+      "type": "image-with-text-section-simple",
+      "name": "Image with text (simple)",
+      "settings": {
+        "image": "shopify://shop_images/Main_b9e0da7f-db89-4d41-83f0-7f417b02831d.jpg",
+        "heading": "The 3p Fulfilled Snowboard",
+        "text": "Check it out",
+        "link": "shopify://products/the-3p-fulfilled-snowboard",
+        "position": false
+      }
+    },
+    "testimonials_simple_NfT9BV": {
+      "type": "testimonials-simple",
+      "blocks": {
+        "testimonial_tWQkYQ": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit auctor duis, sed efficitur ipsum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit auctor duis, sed efficitur ipsum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit auctor duis, sed efficitur ipsum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit auctor duis, sed efficitur ipsum.",
+            "author": "John Doe",
+            "stars": 3
+          }
+        },
+        "testimonial_NkaxX8": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit auctor duis, sed efficitur ipsum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit auctor duis, sed efficitur ipsum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit auctor duis, sed efficitur ipsum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit auctor duis, sed efficitur ipsum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit auctor duis, sed efficitur ipsum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit auctor duis, sed efficitur ipsum.",
+            "author": "John Doe",
+            "stars": 5
+          }
+        },
+        "testimonial_6z8dXi": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit auctor duis, sed efficitur ipsum.",
+            "author": "John Doe",
+            "stars": 4
+          }
+        },
+        "testimonial_bc8LwC": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit auctor duis, sed efficitur ipsum.",
+            "author": "John Doe",
+            "stars": 3
+          }
+        },
+        "testimonial_zEdXV3": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit auctor duis, sed efficitur ipsum.",
+            "author": "John Doe",
+            "stars": 5
+          }
+        },
+        "testimonial_fFzMQw": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit auctor duis, sed efficitur ipsum.",
+            "author": "John Doe",
+            "stars": 3
+          }
+        },
+        "testimonial_eXEqqT": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit auctor duis, sed efficitur ipsum.",
+            "author": "John Doe",
+            "stars": 3
+          }
+        },
+        "testimonial_egcxRA": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit auctor duis, sed efficitur ipsum.",
+            "author": "John Doe",
+            "stars": 5
+          }
+        },
+        "testimonial_jAHAje": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit auctor duis, sed efficitur ipsum.",
+            "author": "John Doe",
+            "stars": 5
+          }
+        },
+        "testimonial_w9Qeb9": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit auctor duis, sed efficitur ipsum.",
+            "author": "John Doe",
+            "stars": 5
+          }
+        },
+        "testimonial_EGHHeh": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit auctor duis, sed efficitur ipsum.",
+            "author": "John Doe",
+            "stars": 5
+          }
+        },
+        "testimonial_h89FLf": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit auctor duis, sed efficitur ipsum.",
+            "author": "John Doe",
+            "stars": 5
+          }
+        },
+        "testimonial_fKmM7m": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit auctor duis, sed efficitur ipsum.",
+            "author": "John Doe",
+            "stars": 5
+          }
+        },
+        "testimonial_rmphXr": {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit auctor duis, sed efficitur ipsum.",
+            "author": "John Doe",
+            "stars": 5
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_tWQkYQ",
+        "testimonial_NkaxX8",
+        "testimonial_6z8dXi",
+        "testimonial_bc8LwC",
+        "testimonial_zEdXV3",
+        "testimonial_fFzMQw",
+        "testimonial_eXEqqT",
+        "testimonial_egcxRA",
+        "testimonial_jAHAje",
+        "testimonial_w9Qeb9",
+        "testimonial_EGHHeh",
+        "testimonial_h89FLf",
+        "testimonial_fKmM7m",
+        "testimonial_rmphXr"
+      ],
+      "name": "Testimonials Simple",
+      "settings": {
+        "section_title": "What Our Customers Say",
+        "section_star_color": "#187fa4"
+      }
+    },
+    "pcc_section": {
+      "type": "featured-collection-custom",
+      "name": "Featured products (custom card)",
+      "settings": {
+        "heading": "Featured",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "show_vendor": true,
+        "show_color_count": true,
+        "show_secondary_image": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "pcc_section",
+    "hero_banner_hPqUyR",
+    "image_banner",
+    "featured_collection",
+    "featured_collection_simple_RqgAMT",
+    "image_with_text_section_simple_ymDcap",
+    "testimonials_simple_NfT9BV"
+  ]
+}

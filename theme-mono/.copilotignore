@@ -1,0 +1,12 @@
+# AI Ignore Rules — Shopify Workspace
+# Prevents irrelevant files from being indexed into Copilot/Cursor context.
+
+**/node_modules/**
+**/dist/**
+**/build/**
+**/.git/**
+**/*.min.js
+**/*.min.css
+**/*.js.map
+**/*.css.map
+**/package-lock.json

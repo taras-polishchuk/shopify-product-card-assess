@@ -1,0 +1,192 @@
+{% comment %}
+  Featured collection section using the custom product card.
+
+  Online Store 2.0 compatible. Renders a responsive grid of product cards
+  with the design system from FE Technical Assessment (Figma).
+{% endcomment %}
+
+{{ 'product-card-custom.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-card-custom.js' | asset_url }}" defer="defer"></script>
+
+<section
+  class="pcc-grid-section section-{{ section.id }}-padding color-{{ section.settings.color_scheme }} gradient"
+  aria-labelledby="pcc-grid-heading-{{ section.id }}"
+>
+  <style>
+    #PccGridSection-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    }
+    @media screen and (min-width: 750px) {
+      #PccGridSection-{{ section.id }} {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+  </style>
+
+  <div
+    id="PccGridSection-{{ section.id }}"
+    class="pcc-grid-section__inner page-width"
+  >
+    {%- if section.settings.heading != blank -%}
+      <div class="pcc-grid-section__header">
+        <h2 class="pcc-grid-section__heading h2" id="pcc-grid-heading-{{ section.id }}">
+          {{ section.settings.heading | escape }}
+        </h2>
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_link | default: '#' }}" class="pcc-grid-section__link">
+            {{ section.settings.button_label | escape }}
+            <svg aria-hidden="true" focusable="false" class="icon icon-caret" viewBox="0 0 10 6" width="10" height="6">
+              <path fill="currentColor" fill-rule="evenodd" d="M9.354.646a.5.5 0 0 0-.708 0L5 4.293 1.354.646a.5.5 0 1 0-.708.708l4 4a.5.5 0 0 0 .708 0l4-4a.5.5 0 0 0 0-.708z" clip-rule="evenodd"/>
+            </svg>
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.collection != blank -%}
+      <div
+        class="pcc-grid pcc-grid--{{ section.settings.columns_desktop }}-col pcc-grid--{{ section.settings.columns_mobile }}-mob"
+        role="list"
+      >
+        {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
+          <div class="pcc-grid__item" role="listitem">
+            {%- render 'product-card-custom',
+              card_product: product,
+              section_id: section.id,
+              show_vendor: section.settings.show_vendor,
+              show_color_count: section.settings.show_color_count,
+              show_secondary_image: section.settings.show_secondary_image,
+              lazy_load: true,
+              skip_styles: true
+            -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <div class="pcc-grid pcc-grid--{{ section.settings.columns_desktop }}-col pcc-grid--{{ section.settings.columns_mobile }}-mob" role="list">
+        {%- for i in (1..section.settings.products_to_show) -%}
+          <div class="pcc-grid__item" role="listitem">
+            {%- render 'product-card-custom',
+              card_product: blank,
+              section_id: section.id,
+              show_vendor: section.settings.show_vendor,
+              show_color_count: section.settings.show_color_count,
+              show_secondary_image: section.settings.show_secondary_image,
+              skip_styles: true
+            -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Featured collection"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "default": 8,
+      "label": "Products to show"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 4,
+      "label": "Columns on desktop"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "options": [
+        { "value": "1", "label": "1 column" },
+        { "value": "2", "label": "2 columns" }
+      ],
+      "default": "2",
+      "label": "Columns on mobile"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show vendor",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_color_count",
+      "label": "Show color count",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "label": "Show secondary image on hover",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36,
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36,
+      "label": "Padding bottom"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured collection"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Product Card — Smoke Test Fixture</title>
+  <link rel="stylesheet" href="../assets/product-card-custom.css">
+</head>
+<body>
+<article class="pcc" data-section-id="fixture" data-product-id="1001" data-product-handle="plain-t-shirt" data-on-sale="true" data-has-colors="true" data-current-variant-id="2001">
+
+  <div class="pcc__media">
+    <a href="/products/plain-t-shirt" class="pcc__media-link" aria-label="Plain T-shirt" tabindex="-1">
+      <img class="pcc__img pcc__img--primary" src="//cdn.shopify.com/s/files/blue-600.jpg" alt="Plain T-shirt - Blue" width="800" height="864" loading="eager" decoding="async">
+      <img class="pcc__img pcc__img--secondary" src="//cdn.shopify.com/s/files/blue-back-600.jpg" alt="" width="800" height="864" loading="lazy" decoding="async" aria-hidden="true">
+    </a>
+    <span class="pcc__badge pcc__badge--sale">On Sale!</span>
+  </div>
+
+  <div class="pcc__info">
+    <fieldset class="pcc__swatches" data-pcc-swatches>
+      <legend class="visually-hidden">Plain T-shirt — Color</legend>
+      <ul class="pcc__swatch-list" role="radiogroup" aria-label="Plain T-shirt — Color" data-pcc-radiogroup>
+        <li class="pcc__swatch-item"><button type="button" class="pcc__swatch pcc__swatch--selected" role="radio" aria-checked="true" aria-label="Blue" tabindex="0" data-variant-id="2001" data-option-value="Blue" data-color-value="rgb(0, 102, 156)"><span class="pcc__swatch-fill" style="background-color: rgb(0, 102, 156);" aria-hidden="true"></span></button></li>
+        <li class="pcc__swatch-item"><button type="button" class="pcc__swatch" role="radio" aria-checked="false" aria-label="Green" tabindex="-1" data-variant-id="2002" data-option-value="Green" data-color-value="rgb(0, 102, 0)"><span class="pcc__swatch-fill" style="background-color: rgb(0, 102, 0);" aria-hidden="true"></span></button></li>
+        <li class="pcc__swatch-item"><button type="button" class="pcc__swatch pcc__swatch--unavailable" role="radio" aria-checked="false" aria-label="Pink (unavailable)" aria-disabled="true" tabindex="-1" data-variant-id="2003" data-option-value="Pink" data-color-value="rgb(255, 204, 255)"><span class="pcc__swatch-fill" style="background-color: rgb(255, 204, 255);" aria-hidden="true"></span></button></li>
+      </ul>
+    </fieldset>
+    <p class="pcc__color-count" aria-hidden="true">3 Colors</p>
+
+    <div class="pcc__heading-group">
+      <p class="pcc__vendor">GOOD BRAND COMPANY</p>
+      <h3 class="pcc__title" id="pcc-title-fixture-1001"><a href="/products/plain-t-shirt" class="pcc__title-link">Plain T-shirt</a></h3>
+    </div>
+
+    <div class="pcc__price pcc__price--sale" data-pcc-price>
+      <span class="pcc__price-compare" data-pcc-compare><s aria-label="Regular price"><span data-pcc-compare-amount>$29.50</span></s></span>
+      <span class="pcc__price-current pcc__price-current--sale" data-pcc-current><span data-pcc-current-amount>$20.00</span></span>
+    </div>
+
+    <p class="pcc__sr-status" data-live-region aria-live="polite" aria-atomic="true"></p>
+  </div>
+
+  <script type="application/json" class="pcc__data" data-pcc-data>
+  {
+    "id": 1001,
+    "title": "Plain T-shirt",
+    "vendor": "Good Brand Company",
+    "url": "/products/plain-t-shirt",
+    "onSale": true,
+    "hasColors": true,
+    "defaultVariantId": 2001,
+    "options": [
+      { "name": "Color", "values": ["Blue", "Green", "Pink"] }
+    ],
+    "variants": [
+      { "id": 2001, "title": "Blue", "available": true, "price": 2000, "compareAtPrice": 2950, "priceCurrency": "USD", "featuredMedia": "//cdn.shopify.com/s/files/blue-600.jpg", "featuredMediaAlt": "Plain T-shirt - Blue", "optionValues": [{"name":"Blue","matches":"Blue"}], "url": "/products/plain-t-shirt?variant=2001" },
+      { "id": 2002, "title": "Green", "available": true, "price": 2000, "compareAtPrice": 0, "priceCurrency": "USD", "featuredMedia": "//cdn.shopify.com/s/files/green-600.jpg", "featuredMediaAlt": "Plain T-shirt - Green", "optionValues": [{"name":"Green","matches":"Green"}], "url": "/products/plain-t-shirt?variant=2002" },
+      { "id": 2003, "title": "Pink", "available": false, "price": 2000, "compareAtPrice": 0, "priceCurrency": "USD", "featuredMedia": "//cdn.shopify.com/s/files/pink-600.jpg", "featuredMediaAlt": "Plain T-shirt - Pink", "optionValues": [{"name":"Pink","matches":"Pink"}], "url": "/products/plain-t-shirt?variant=2003" }
+    ]
+  }
+  </script>
+</article>
+
+<script src="../assets/product-card-custom.js"></script>
+</body>
+</html>

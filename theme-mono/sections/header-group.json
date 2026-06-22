@@ -1,0 +1,85 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement-bar-0": {
+          "type": "announcement",
+          "settings": {
+            "text": "Welcome to our store",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "announcement-bar-0"
+      ],
+      "disabled": true,
+      "settings": {
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "color_scheme": "scheme-1",
+        "show_line_separator": true,
+        "show_social": false,
+        "enable_country_selector": false,
+        "enable_language_selector": false
+      }
+    },
+    "announcement_bar_simple_dKV8re": {
+      "type": "announcement-bar-simple",
+      "name": "Announcement Bar Simple",
+      "settings": {
+        "enable_announcement": true,
+        "announcement_text": "Free shipping on orders over $50!",
+        "background_color": "#105a74",
+        "link_url": "shopify://collections",
+        "text_color": "#ffffff",
+        "show_on_mobile": false
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "logo_position": "middle-left",
+        "mobile_logo_position": "center",
+        "menu": "main-menu",
+        "menu_type_desktop": "dropdown",
+        "sticky_header_type": "on-scroll-up",
+        "show_line_separator": true,
+        "color_scheme": "scheme-1",
+        "menu_color_scheme": "scheme-1",
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "enable_customer_avatar": true,
+        "margin_bottom": 0,
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "metafield_banner_simple_Wrxiay": {
+      "type": "metafield-banner-simple",
+      "name": "Metafield text banner",
+      "settings": {
+        "fallback_text": "Fallback text (if metafield is empty)",
+        "metafield_banner_disabled": false
+      }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "announcement_bar_simple_dKV8re",
+    "header",
+    "metafield_banner_simple_Wrxiay"
+  ]
+}

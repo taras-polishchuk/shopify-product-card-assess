@@ -1,0 +1,49 @@
+{{ 'metafield-banner-simple.css' | asset_url | stylesheet_tag }}
+
+{% assign promo_banner_text = shop.metafields.custom.promo_banner_text %}
+
+<div class="metafield-banner-simple__wrapper">
+  {% unless section.settings.metafield_banner_disabled %}
+    {% if promo_banner_text != blank %}
+      <span class="metafield-banner-simple__text">{{ promo_banner_text }}</span>
+    {% elsif section.settings.fallback_text != blank %}
+      <span class="metafield-banner-simple__text">{{ section.settings.fallback_text }}</span>
+    {% endif %}
+  {% endunless %}
+</div>
+
+{% schema %}
+{
+  "name": "Metafield Banner Simple",
+  "tag": "section",
+  "class": "metafield-banner-simple",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Metafield Banner"
+    },
+    {
+      "type": "paragraph",
+      "content": "Displays the value of the shop metafield: namespace = custom, key = promo_text. Set it in Shopify Admin → Settings → Custom data → Shop."
+    },
+    {
+      "type": "text",
+      "id": "fallback_text",
+      "label": "Fallback text (if metafield is empty)",
+      "default": "Fallback text (if metafield is empty)"
+    },
+    {
+      "type": "checkbox",
+      "id": "metafield_banner_disabled",
+      "label": "Disable metafield banner",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Metafield text banner",
+      "category": "Metafield sections"
+    }
+  ]
+}
+{% endschema %}

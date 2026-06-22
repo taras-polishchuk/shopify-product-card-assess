@@ -1,0 +1,199 @@
+{% comment %}
+  Renders a product card matching the FE Technical Assessment design.
+
+  Accepts:
+    - card_product: {Object} Product Liquid object (required)
+    - section_id: {String} Parent section id (required)
+    - show_vendor: {Boolean} Render vendor line. Default true
+    - show_color_count: {Boolean} Render "N Colors" under swatches. Default true
+    - show_secondary_image: {Boolean} Show secondary image on hover. Default true
+    - skip_styles: {Boolean} Skip CSS include (use when looping). Default false
+    - lazy_load: {Boolean} Lazy-load images. Default true
+
+  Design tokens (Figma: FE Technical Assessment, frame 1:38):
+    Card: 315 x 452, vertical, 15px gap, image 315x340
+    Vendor: Roboto Regular 14 / 16, color #111
+    Title:  Roboto Medium 16 / 18, color #0A4874
+    Price compare: Roboto Regular 14, strikethrough, #111
+    Price sale:     Roboto Regular 14, #FF0000
+    Price gap: 8
+    Swatch: 20x20 circle, 8px gap, selected = 24x24 navy ring
+    Badge "On Sale!": pill, red 1px stroke, red text, Franklin Gothic Medium 15
+{% endcomment %}
+
+{%- liquid
+  assign product = card_product
+  assign on_sale = false
+  if product.compare_at_price > product.price
+    assign on_sale = true
+  endif
+
+  assign default_variant = product.selected_or_first_available_variant
+  assign option_to_render = nil
+  assign has_colors = false
+  assign color_count = 0
+
+  if product.options_with_values.size > 0
+    assign first_option = product.options_with_values | first
+    assign option_name_down = first_option.name | downcase
+    if option_name_down == 'color' or option_name_down == 'colour'
+      assign option_to_render = first_option
+      assign has_colors = true
+      assign color_count = first_option.values.size
+    endif
+  endif
+
+  assign current_variant_id = default_variant.id
+  assign current_image = default_variant.featured_image | default: product.featured_image
+-%}
+
+{%- unless skip_styles -%}
+  {{ 'product-card-custom.css' | asset_url | stylesheet_tag }}
+{%- endunless -%}
+
+<article
+  class="pcc"
+  data-section-id="{{ section_id }}"
+  data-product-id="{{ product.id }}"
+  data-product-handle="{{ product.handle }}"
+  data-on-sale="{{ on_sale }}"
+  data-has-colors="{{ has_colors }}"
+  data-current-variant-id="{{ current_variant_id }}"
+  aria-labelledby="pcc-title-{{ section_id }}-{{ product.id }}"
+>
+  <div class="pcc__media">
+    <a
+      href="{{ product.url }}"
+      class="pcc__media-link"
+      aria-label="{{ product.title | escape }}"
+      tabindex="-1"
+    >
+      {%- if current_image -%}
+        <img
+          class="pcc__img pcc__img--primary"
+          src="{{ current_image | image_url: width: 600 }}"
+          srcset="
+            {{ current_image | image_url: width: 400 }} 400w,
+            {{ current_image | image_url: width: 600 }} 600w,
+            {{ current_image | image_url: width: 800 }} 800w
+          "
+          sizes="(min-width: 1200px) 315px, (min-width: 750px) calc((100vw - 60px) / 3), calc((100vw - 40px) / 2)"
+          alt="{{ current_image.alt | default: product.title | escape }}"
+          width="{{ current_image.width }}"
+          height="{{ current_image.height }}"
+          loading="{% if lazy_load %}lazy{% else %}eager{% endif %}"
+          decoding="async"
+          data-default-src="{{ current_image | image_url: width: 600 }}"
+        >
+      {%- else -%}
+        {{ 'product-apparel-2' | placeholder_svg_tag: 'pcc__img pcc__img--primary placeholder-svg' }}
+      {%- endif -%}
+
+      {%- if product.media.size > 1 and show_secondary_image -%}
+        {%- assign secondary = product.media[1] -%}
+        <img
+          class="pcc__img pcc__img--secondary"
+          src="{{ secondary | image_url: width: 600 }}"
+          alt="{{ secondary.alt | default: product.title | escape }}"
+          width="{{ secondary.width }}"
+          height="{{ secondary.height }}"
+          loading="lazy"
+          decoding="async"
+          aria-hidden="true"
+        >
+      {%- endif -%}
+    </a>
+
+    {%- if on_sale and product.available -%}
+      <span class="pcc__badge pcc__badge--sale" aria-label="{{ 'products.product.on_sale' | t }}">
+        {{ 'products.product.on_sale' | t }}
+      </span>
+    {%- elsif product.available == false -%}
+      <span class="pcc__badge pcc__badge--soldout" aria-label="{{ 'products.product.sold_out' | t }}">
+        {{ 'products.product.sold_out' | t }}
+      </span>
+    {%- endif -%}
+  </div>
+
+  <div class="pcc__info">
+    {%- if has_colors -%}
+      {%- render 'swatch-custom',
+        product: product,
+        option: option_to_render,
+        section_id: section_id,
+        current_variant_id: current_variant_id
+      -%}
+      {%- if show_color_count -%}
+        <p class="pcc__color-count" aria-hidden="true">
+          {{ color_count }} {{ color_count | pluralize: 'Color', 'Colors' }}
+        </p>
+      {%- endif -%}
+    {%- endif -%}
+
+    <div class="pcc__heading-group">
+      {%- if show_vendor and product.vendor != blank -%}
+        <p class="pcc__vendor">{{ product.vendor | escape }}</p>
+      {%- endif -%}
+      <h3 class="pcc__title" id="pcc-title-{{ section_id }}-{{ product.id }}">
+        <a href="{{ product.url }}" class="pcc__title-link">
+          {{- product.title | escape -}}
+        </a>
+      </h3>
+    </div>
+
+    {%- render 'price-custom',
+      product: product,
+      section_id: section_id,
+      current_variant_id: current_variant_id
+    -%}
+
+    <p class="pcc__sr-status" data-live-region aria-live="polite" aria-atomic="true"></p>
+  </div>
+
+  <script type="application/json" class="pcc__data" data-pcc-data>
+    {
+      "id": {{ product.id }},
+      "title": {{ product.title | json }},
+      "vendor": {{ product.vendor | json }},
+      "url": {{ product.url | json }},
+      "onSale": {{ on_sale }},
+      "hasColors": {{ has_colors }},
+      "defaultVariantId": {{ current_variant_id }},
+      "options": [
+        {%- if has_colors -%}
+          {
+            "name": {{ option_to_render.name | json }},
+            "values": [
+              {%- for v in option_to_render.values -%}
+                {{ v | json }}{% unless forloop.last %},{% endunless %}
+              {%- endfor -%}
+            ]
+          }
+        {%- endif -%}
+      ],
+      "variants": [
+        {%- for v in product.variants -%}
+          {
+            "id": {{ v.id }},
+            "title": {{ v.title | json }},
+            "available": {{ v.available }},
+            "price": {{ v.price }},
+            "compareAtPrice": {{ v.compare_at_price | default: 0 }},
+            "priceCurrency": {{ shop.currency | json }},
+            "featuredMedia": {% if v.featured_image %}{{ v.featured_image | image_url: width: 600 | json }}{% else %}null{% endif %},
+            "featuredMediaAlt": {% if v.featured_image %}{{ v.featured_image.alt | json }}{% else %}null{% endif %},
+            "optionValues": [
+              {%- for ov in option_to_render.values -%}
+                {
+                  "name": {{ ov | json }},
+                  "matches": {{ v.options[forloop.index0] | json }}
+                }{% unless forloop.last %},{% endunless %}
+              {%- endfor -%}
+            ],
+            "url": {{ v.url | json }}
+          }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+</article>

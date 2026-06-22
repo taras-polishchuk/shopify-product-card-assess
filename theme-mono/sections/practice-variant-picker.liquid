@@ -1,0 +1,79 @@
+{{ 'practice-variant-picker.css' | asset_url | stylesheet_tag }}
+
+{% assign current_variant = product.selected_or_first_available_variant %}
+{% comment %} {% assign product_form_id = 'product-form-' | append: section.id %} {% endcomment %}
+
+<div
+  class="variant-picker"
+  data-section-id="{{ section.id }}"
+  data-product-id="{{ product.id }}"
+  data-variants="{{ product.variants | json | escape }}"
+>
+  {%- unless product.has_only_default_variant -%}
+    {%- for option in product.options_with_values -%}
+      <div class="variant-picker__option" data-option-index="{{ forloop.index0 }}">
+        <label class="variant-picker__option-label">
+          {{ option.name }}:
+          <span class="variant-picker__selected-value" data-option-name="{{ option.name }}">
+            {{ option.selected_value }}
+          </span>
+        </label>
+        S
+        <div class="variant-picker__option-values">
+          {%- for value in option.values -%}
+            {%- assign is_available = false -%}
+            {%- for variant in product.variants -%}
+              {%- if variant.available -%}
+                {%- case option.position -%}
+                  {%- when 1 -%}
+                    {%- if variant.option1 == value -%}{%- assign is_available = true -%}{%- endif -%}
+                  {%- when 2 -%}
+                    {%- if variant.option2 == value -%}{%- assign is_available = true -%}{%- endif -%}
+                  {%- when 3 -%}
+                    {%- if variant.option3 == value -%}{%- assign is_available = true -%}{%- endif -%}
+                {%- endcase -%}
+              {%- endif -%}
+            {%- endfor -%}
+
+            <button
+              type="button"
+              class="variant-picker__option-btn{% if option.selected_value == value %} is-selected{% endif %}{% unless is_available %} is-unavailable{% endunless %}"
+              data-value="{{ value | escape }}"
+              data-option-index="{{ forloop.parentloop.index0 }}"
+              {% if option.selected_value == value %}
+                aria-pressed="true"
+              {% else %}
+                aria-pressed="false"
+              {% endif %}
+            >
+              {{ value }}
+            </button>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endfor -%}
+  {%- endunless -%}
+
+  <input
+    type="hidden"
+    name="id"
+    value="{{ current_variant.id }}"
+    data-variant-id
+  >
+</div>
+
+<script src="{{ 'practice-variant-picker.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Variant Picker",
+  "tag": "section",
+  "class": "section-variant-picker",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Variant Picker"
+    }
+  ]
+}
+{% endschema %}
