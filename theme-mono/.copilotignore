@@ -9,4 +9,5 @@
 **/*.min.css
 **/*.js.map
 **/*.css.map
-**/package-lock.json
+|**/package-lock.json
+career-operating-system/uk/**
